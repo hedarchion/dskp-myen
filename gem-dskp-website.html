@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSKP Interactive Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #e9ecef;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .main-nav button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 0 8px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-nav button:hover, .main-nav button.active {
+            background-color: #0056b3;
+        }
+
+        .subject-content {
+            display: none; /* Hidden by default */
+        }
+
+        .subject-content.active {
+            display: block;
+        }
+
+        .skill-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Align tabs to the left */
+            background-color: #f8f9fa;
+            padding: 8px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+
+        .skill-nav button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            flex-grow: 0; /* Prevent buttons from growing too much */
+        }
+
+        .skill-nav button:hover, .skill-nav button.active {
+            background-color: #545b62;
+        }
+
+        .skill-details {
+            display: none; /* Hidden by default */
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .skill-details.active {
+            display: block;
+        }
+
+        h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #00674e; /* A slightly different shade for sub-headers */
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .description {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #eef7ff;
+            border-left: 4px solid #007bff;
+            font-style: italic;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+            padding: 8px;
+            background-color: #fff3cd;
+            border-left: 3px solid #ffeeba;
+        }
+
+        .cite {
+            font-size: 0.8em;
+            color: #007bff;
+            font-weight: bold;
+            margin-left: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-nav, .skill-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .main-nav button, .skill-nav button {
+                margin: 5px 0;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DSKP Interactive Viewer</h1>
+    </header>
+
+    <div class="container">
+        <nav class="main-nav">
+            <button onclick="showSubject('bm_f1', this)" class="active">Bahasa Melayu Tingkatan 1</button>
+            <button onclick="showSubject('eng_f1', this)">English Form 1</button>
+            <button onclick="showSubject('eng_f3', this)">English Form 3</button>
+        </nav>
+
+        <div id="bm_f1" class="subject-content active">
+            <p class="description">The Dokumen Standard Kurikulum dan Pentaksiran (DSKP) Bahasa Melayu Tingkatan 1 outlines the <strong>Standard Kandungan (SK)</strong> and <strong>Standard Pembelajaran (SP)</strong> for various language skills. <span class="cite">[cite: 1]</span> The SK is a statement about the field of knowledge that students should know and be able to do, covering knowledge, skills, and values. <span class="cite">[cite: 2]</span> The SP specifies the criteria for ensuring learning quality and measurable achievement for each SK. <span class="cite">[cite: 3]</span></p>
+            <nav class="skill-nav">
+                <button onclick="showSkill('bm_f1', 'kemahiran_mendengar_bertutur', this)" class="active">1.0 Kemahiran Mendengar dan Bertutur</button>
+                <button onclick="showSkill('bm_f1', 'kemahiran_membaca', this)">2.0 Kemahiran Membaca</button>
+                <button onclick="showSkill('bm_f1', 'kemahiran_menulis', this)">3.0 Kemahiran Menulis</button>
+                <button onclick="showSkill('bm_f1', 'aspek_seni_bahasa', this)">4.0 Aspek Seni Bahasa</button>
+                <button onclick="showSkill('bm_f1', 'aspek_tatabahasa', this)">5.0 Aspek Tatabahasa</button>
+            </nav>
+
+            <div id="bm_f1_kemahiran_mendengar_bertutur" class="skill-details active">
+                <h2>1.0 Kemahiran Mendengar dan Bertutur <span class="cite">[cite: 4]</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STANDARD KANDUNGAN <span class="cite">[cite: 5]</span></th>
+                            <th>STANDARD PEMBELAJARAN <span class="cite">[cite: 5]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.1 Mendengar, mengenal dan menyebut perkataan, rangkai kata, istilah dan ungkapan serta intonasi ayat dalam pelbagai ujaran. <span class="cite">[cite: 5]</span></td>
+                            <td>1.1.1 Mendengar dan mengenal sebutan perkataan dan rangkai kata dalam pelbagai ujaran dengan betul dan tepat. <span class="cite">[cite: 6]</span></td>
+                        </tr>
+                        <tr>
+                            <td>1.2 Mendengar dan memahami perkataan, rangkai kata, istilah, ungkapan dan ayat dalam pelbagai ujaran. <span class="cite">[cite: 7]</span></td>
+                            <td>
+                                1.2.1 Mendengar dan memahami perkataan, rangkai kata, istilah dan ungkapan dalam pelbagai ujaran dengan betul dan tepat mengikut konteks. <span class="cite">[cite: 8]</span><br>
+                                1.2.2 Mendengar dan memahami ayat tunggal dan ayat majmuk yang mudah dalam ujaran dengan menyatakan maksud yang betul, tepat dan jelas mengikut konteks. <span class="cite">[cite: 9]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.3 Mendengar dan memahami maklumat, fakta, idea dan hujah dalam pelbagai wacana dan memberikan respons. <span class="cite">[cite: 10]</span></td>
+                            <td>
+                                1.3.1 Mendengar dan memahami maklumat, fakta dan idea dalam pelbagai wacana dengan memberikan respons secara lisan dengan betul, tepat dan bermakna. <span class="cite">[cite: 11]</span><br>
+                                1.3.2 Mendengar dan memahami maklumat, fakta dan idea dalam pengumuman dan ucapan dengan memberikan respons yang betul, tepat dan bermakna. <span class="cite">[cite: 12]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.4 Berbicara tentang sesuatu perkara dalam pelbagai situasi formal dan tidak formal. <span class="cite">[cite: 13]</span></td>
+                            <td>
+                                1.4.1 Berbual tentang kegiatan harian serta hal-hal persendirian menggunakan sebutan dan intonasi yang betul secara santun. <span class="cite">[cite: 14]</span><br>
+                                1.4.2 Berbicara untuk memulakan dan mengakhiri perbualan, bertanya khabar, serta menyatakan terima kasih dan penghargaan secara bertatasusila. <span class="cite">[cite: 15]</span><br>
+                                1.4.3 Menceritakan pengalaman diri dan orang lain dalam pelbagai situasi dengan sebutan dan intonasi yang betul secara santun. <span class="cite">[cite: 16]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.5 Bersoal jawab tentang sesuatu perkara dengan menggunakan pelbagai soalan dan mengemukakan jawapan. <span class="cite">[cite: 17]</span></td>
+                            <td>
+                                1.5.1 Mengemukakan soalan bertumpu untuk mengetahui pesanan, arahan, panduan dan tunjuk cara dengan betul tepat dan secara bertatasusila. <span class="cite">[cite: 18]</span><br>
+                                1.5.2 Memberikan jawapan yang sesuai tentang sesuatu perkara dengan betul, tepat dan secara bertatasusila. <span class="cite">[cite: 19]</span><br>
+                                1.5.3 Bersoal jawab dalam perbualan menggunakan soalan bertumpu dan mengemukakan jawapan yang sesuai dan betul secara bertatasusila. <span class="cite">[cite: 20]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.6 Menyampaikan maklumat tentang sesuatu perkara dalam pelbagai situasi. <span class="cite">[cite: 21]</span></td>
+                            <td>
+                                1.6.1 Menyampaikan isi dan fakta tentang sesuatu perkara dengan betul dan jelas menggunakan ayat yang gramatis. <span class="cite">[cite: 22]</span><br>
+                                1.6.2 Menyampaikan maklumat dalam bentuk ucapan dan pengumuman dengan betul, tepat, jelas, intonasi yang sesuai dan berkesan menggunakan ayat yang gramatis. <span class="cite">[cite: 23]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.7 Berbincang dan berunding tentang sesuatu perkara. <span class="cite">[cite: 24]</span></td>
+                            <td>
+                                1.7.1 Berbincang tentang sesuatu perkara yang didengar atau dilihat untuk bertukar-tukar pandangan secara rasional dengan ayat yang gramatis dan bahasa yang santun. <span class="cite">[cite: 25]</span><br>
+                                1.7.2 Berunding untuk mendapatkan persetujuan bagi sesuatu tawaran tentang sesuatu perkara secara rasional dengan ayat yang gramatis dan bahasa yang santun. <span class="cite">[cite: 26]</span>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>1.8 Mengulas sesuatu perkara, isu atau topik. <span class="cite">[cite: 27]</span></td>
+                            <td>
+                                1.8.1 Menerangkan sesuatu perkara dengan bernas dan kritis secara jelas menggunakan ayat yang betul, tepat dan gramatis. <span class="cite">[cite: 28]</span><br>
+                                1.8.2 Mengulas peristiwa mengikut urutan secara jelas dan bernas menggunakan ayat yang gramatis. <span class="cite">[cite: 29]</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="bm_f1_kemahiran_membaca" class="skill-details">
+                <h2>2.0 Kemahiran Membaca</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STANDARD KANDUNGAN</th>
+                            <th>STANDARD PEMBELAJARAN <span class="cite">[cite: 30]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2.1 Membaca secara mekanis pelbagai bahan prosa dan puisi. <span class="cite">[cite: 30]</span></td>
+                            <td>
+                                2.1.1 Membaca secara mekanis pengumuman, ikrar, iklan dan promosi dengan sebutan dan intonasi yang betul, nada yang sesuai serta kepantasan yang wajar. <span class="cite">[cite: 31]</span><br>
+                                2.1.2 Membaca secara mekanis pantun dengan sebutan dan intonasi yang betul dan nada yang sesuai. <span class="cite">[cite: 32]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.2 Membaca untuk memahami makna perkataan, rangkai kata, istilah, ungkapan, ayat, maklumat dan maksud keseluruhan daripada pelbagai bahan. <span class="cite">[cite: 33]</span></td>
+                            <td>
+                                2.2.1 Membaca untuk memahami makna perkataan yang terdapat dalam pelbagai bahan menggunakan glosari dan kamus dengan betul dan tepat. <span class="cite">[cite: 34]</span><br>
+                                2.2.2 Membaca untuk memahami maklumat daripada arahan dalam pelbagai bahan dengan memberikan respons yang betul dan tepat. <span class="cite">[cite: 35]</span><br>
+                                2.2.3 Membaca untuk memahami idea keseluruhan dalam pelbagai bahan prosa dengan betul dan tepat secara luncuran dan imbasan. <span class="cite">[cite: 36]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.3 Membaca untuk memproses maklumat daripada pelbagai bahan. <span class="cite">[cite: 37]</span></td>
+                            <td>2.3.1 Membaca untuk menyaring dan mengenal pasti idea utama dan idea sampingan dengan betul dan tepat. <span class="cite">[cite: 38]</span></td>
+                        </tr>
+                        <tr>
+                            <td>2.4 Membaca secara ekstensif pelbagai bahan untuk mengukuhkan kelancaran membaca, meluaskan perbendaharaan kata dan ilmu pengetahuan. <span class="cite">[cite: 39]</span></td>
+                            <td>2.4.1 Membaca secara ekstensif pelbagai bahan fiksyen dan bukan fiksyen untuk meningkatkan penguasaan kosa kata dan ungkapan menarik dengan pemahaman dan penghayatan yang baik. <span class="cite">[cite: 40]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="bm_f1_kemahiran_menulis" class="skill-details">
+                <h2>3.0 Kemahiran Menulis <span class="cite">[cite: 41]</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STANDARD KANDUNGAN</th>
+                            <th>STANDARD PEMBELAJARAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3.1 Menulis untuk menerangkan makna kata dan istilah; maksud rangkai kata, ungkapan dan ayat. <span class="cite">[cite: 41, 42]</span></td>
+                            <td>3.1.1 Menulis untuk menyatakan makna kata dengan betul mengikut konteks. <span class="cite">[cite: 42]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3.2 Menulis untuk mengemukakan maklumat dan pandangan tentang sesuatu perkara. <span class="cite">[cite: 43]</span></td>
+                            <td>3.2.1 Menulis untuk menyatakan sesuatu situasi yang dibaca, didengar dan ditonton menggunakan ayat yang betul, tepat dan gramatis. <span class="cite">[cite: 44]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3.3 Menulis untuk melengkapkan maklumat dalam pelbagai bahan. <span class="cite">[cite: 45]</span></td>
+                            <td>3.3.1 Menulis untuk melengkapkan maklumat diri dan ayat dalam pelbagai bahan dengan betul dan tepat. <span class="cite">[cite: 46]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3.4 Menulis untuk menghasilkan prosa secara terancang. <span class="cite">[cite: 47]</span></td>
+                            <td>
+                                3.4.1 Membina kerangka penulisan dengan menyenaraikan isi yang sesuai secara terancang dan kemas menggunakan bahasa yang tepat. <span class="cite">[cite: 47]</span><br>
+                                3.4.2 Menulis perenggan pendahuluan dengan membina ayat tema, ayat rangsangan dan ayat arahan secara terancang, tertib dan kemas menggunakan bahasa yang tepat, indah dan menarik. <span class="cite">[cite: 48]</span><br>
+                                3.4.3 Menulis perenggan isi dan kesimpulan yang kemas menggunakan ejaan yang betul dan bahasa yang tepat. <span class="cite">[cite: 49]</span><br>
+                                3.4.4 Menulis karangan berdasarkan bahan rangsangan dan cerita menggunakan ejaan yang betul dan bahasa yang tepat, indah serta menarik. <span class="cite">[cite: 50]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3.5 Menulis untuk meringkaskan dan merumus pelbagai bahan prosa. <span class="cite">[cite: 51]</span></td>
+                            <td>3.5.1 Menulis isi-isi penting untuk menghasilkan ringkasan dengan betul menggunakan ayat yang gramatis. <span class="cite">[cite: 52]</span></td>
+                        </tr>
+                        <tr>
+                            <td>3.6 Menulis untuk mengolah maklumat bagi menghasilkan pelbagai bentuk penulisan dan grafik. <span class="cite">[cite: 53]</span></td>
+                            <td>
+                                3.6.1 Menulis untuk mengolah maklumat daripada bahan grafik kepada bentuk prosa bentuk puisi dan bentuk ilustrasi dengan menggunakan bahasa yang betul dan tafsiran yang tepat. <span class="cite">[cite: 54]</span><br>
+                                3.6.2 Menulis untuk mengolah maklumat daripada bahan grafik kepada perenggan dan bahan prosa atau puisi kepada bahan ilustrasi menggunakan ayat yang gramatis. <span class="cite">[cite: 55]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3.7 Mengedit dan memurnikan pelbagai teks. <span class="cite">[cite: 56]</span></td>
+                            <td>3.7.1 Mengedit ejaan, tanda baca dan kesalahan nahu yang mudah dengan betul tanpa mengubah maksud asal ayat. <span class="cite">[cite: 57]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="bm_f1_aspek_seni_bahasa" class="skill-details">
+                <h2>4.0 Aspek Seni Bahasa</h2>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>STANDARD KANDUNGAN</th>
+                            <th>STANDARD PEMBELAJARAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4.1 Memahami dan mengapresiasi karya sastera dengan memberikan respons peribadi. <span class="cite">[cite: 58]</span></td>
+                            <td>
+                                4.1.1 Memahami dan mengapresiasi karya prosa dengan memberikan respons peribadi tentang sinopsis, tema dan persoalan dengan betul, rasional dan penuh penghayatan. <span class="cite">[cite: 59]</span><br>
+                                4.1.2 Memahami dan mengapresiasi karya puisi dengan memberikan respons peribadi tentang bentuk, huraian maksud dengan betul, rasional dan penuh penghayatan. <span class="cite">[cite: 60]</span><br>
+                                4.1.3 Memahami dan mengapresiasi karya sastera dengan memberikan respons peribadi dari aspek pengulangan kata dan singkatan kata dengan betul dan penuh penghayatan. <span class="cite">[cite: 61]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4.2 Memahami dan menggunakan perbandingan semacam, peribahasa, kata-kata hikmat, kiasan madah pujangga, dan bahasa berirama dalam komunikasi dan penulisan. <span class="cite">[cite: 62]</span></td>
+                            <td>4.2.1 Memahami dan menggunakan perbandingan semacam dalam komunikasi dan penulisan dengan betul, tepat dan mengikut konteks. <span class="cite">[cite: 63]</span></td>
+                        </tr>
+                        <tr>
+                            <td>4.3 Menghasilkan karya fiksyen dan puisi secara terancang. <span class="cite">[cite: 64]</span></td>
+                            <td>
+                                4.3.1 Menghasilkan karya fiksyen dengan mengaplikasikan kerangka penulisan sastera secara terancang dan tertib menggunakan idea yang kreatif serta bahasa yang indah dan menarik. <span class="cite">[cite: 65]</span><br>
+                                4.3.2 Menghasilkan syair secara terancang dan tertib, menggunakan idea yang kreatif serta bahasa yang indah dan menarik. <span class="cite">[cite: 66]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4.4 Mempersembahkan karya prosa, puisi dan pelbagai persembahan lain. <span class="cite">[cite: 67]</span></td>
+                            <td>4.4.1 Mempersembahkan pengacaraan menggunakan sebutan, intonasi, nada, gaya dan bahasa badan yang sesuai melalui teknik yang menarik dan berkesan. <span class="cite">[cite: 67]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="bm_f1_aspek_tatabahasa" class="skill-details">
+                <h2>5.0 Aspek Tatabahasa <span class="cite">[cite: 68]</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STANDARD KANDUNGAN</th>
+                            <th>STANDARD PEMBELAJARAN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>5.1 Memahami dan menggunakan perkataan daripada pelbagai golongan kata dalam pelbagai ayat. <span class="cite">[cite: 69]</span></td>
+                            <td>
+                                5.1.1 Memahami dan menggunakan kata nama am dan kata nama khas yang tunggal dan yang mengalami pemajmukan dengan betul mengikut konteks. <span class="cite">[cite: 70]</span><br>
+                                5.1.2 Memahami dan menggunakan kata adjektif warna, bentuk, perasaan dan waktu dengan betul mengikut konteks. <span class="cite">[cite: 71]</span><br>
+                                5.1.3 Memahami dan menggunakan kata seru, kata tanya, kata perintah, kata pembenar dan kata pangkal ayat dengan betul mengikut konteks. <span class="cite">[cite: 72]</span><br>
+                                5.1.4 Memahami dan menggunakan kata kerja tak transitif dengan betul mengikut konteks. <span class="cite">[cite: 73]</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5.2 Memahami dan menggunakan kata ganda dalam pelbagai ayat. <span class="cite">[cite: 74]</span></td>
+                            <td>5.2.1 Memahami dan menggunakan kata ganda penuh, kata ganda penuh berimbuhan dan kata ganda majmuk dengan betul mengikut konteks. <span class="cite">[cite: 75]</span></td>
+                        </tr>
+                        <tr>
+                            <td>5.3 Memahami dan menggunakan kata terbitan dalam pelbagai ayat. <span class="cite">[cite: 76]</span></td>
+                            <td>5.3.1 Memahami dan menggunakan awalan dan akhiran bagi kata nama dengan betul mengikut konteks. <span class="cite">[cite: 77]</span></td>
+                        </tr>
+                        <tr>
+                            <td>5.4 Memahami dan menggunakan frasa dalam pelbagai ayat. <span class="cite">[cite: 78]</span></td>
+                            <td>5.4.1 Memahami dan menggunakan frasa nama dengan betul mengikut konteks. <span class="cite">[cite: 79]</span></td>
+                        </tr>
+                        <tr>
+                            <td>5.5 Memahami dan membina pelbagai ayat. <span class="cite">[cite: 79]</span></td>
+                            <td>5.5.1 Memahami dan membina ayat berdasarkan pola ayat inti dengan betul dan tepat mengikut konteks. <span class="cite">[cite: 80]</span></td>
+                        </tr>
+                        <tr>
+                            <td>5.6 Menganalisis dan membetulkan kesalahan sesuatu ayat. <span class="cite">[cite: 81]</span></td>
+                            <td>5.6.1 Menganalisis dan membetulkan kesalahan ayat mudah. <span class="cite">[cite: 81]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note">These tables provide a comprehensive overview of the Standard Kandungan and Standard Pembelajaran for Bahasa Melayu Tingkatan 1 as outlined in the DSKP. <span class="cite">[cite: 81]</span> They serve as a guide for curriculum implementation and assessment. <span class="cite">[cite: 82]</span></p>
+            </div>
+        </div>
+
+        <div id="eng_f1" class="subject-content">
+            <p class="description">Based on the sources provided, here are the <strong>Content Standards (CS)</strong> and <strong>Learning Standards (LS)</strong> for English Form 1. <span class="cite">[cite: 83]</span></p>
+            <nav class="skill-nav">
+                <button onclick="showSkill('eng_f1', 'listening', this)" class="active">1.0 Listening</button>
+                <button onclick="showSkill('eng_f1', 'speaking', this)">2.0 Speaking</button>
+                <button onclick="showSkill('eng_f1', 'reading', this)">3.0 Reading</button>
+                <button onclick="showSkill('eng_f1', 'writing', this)">4.0 Writing</button>
+                <button onclick="showSkill('eng_f1', 'lit_in_action', this)">5.0 Literature in Action</button>
+            </nav>
+
+            <div id="eng_f1_listening" class="skill-details active">
+                <h2>1.0 LISTENING</h2>
+                <p class="description">The Content Standards for Listening focus on pupils’ ability to <strong>understand meaning</strong>, <strong>use appropriate listening strategies</strong>, and <strong>recognise typical features of spoken texts</strong>. <span class="cite">[cite: 84]</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 84]</span></th>
+                            <th>Focus <span class="cite">[cite: 84]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 84]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1.1 Understand meaning in a variety of familiar contexts</strong> <span class="cite">[cite: 85]</span></td>
+                            <td>Understand the main idea when listening to texts on familiar topics <span class="cite">[cite: 86]</span></td>
+                            <td><strong>1.1.1</strong> Understand with little or no support the main ideas in simple longer texts on a range of familiar topics <span class="cite">[cite: 87]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 88]</span></td>
+                            <td>Understand specific details when listening to texts on familiar topics <span class="cite">[cite: 88]</span></td>
+                            <td><strong>1.1.2</strong> Understand with little or no support specific information and details in simple longer texts on a range of familiar topics <span class="cite">[cite: 89]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 90]</span></td>
+                            <td>Understand attitude or opinion when listening to texts on familiar topics <span class="cite">[cite: 90]</span></td>
+                            <td>1.1.3 No learning standard (will be taught in subsequent years) <span class="cite">[cite: 91]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong></td>
+                            <td>Understand classroom instructions about familiar topics <span class="cite">[cite: 92]</span></td>
+                            <td><strong>1.1.4</strong> Understand longer sequences of supported classroom instructions <span class="cite">[cite: 92]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong></td>
+                            <td>Understand questions on familiar topics <span class="cite">[cite: 93]</span></td>
+                            <td><strong>1.1.5</strong> Understand more complex supported questions <span class="cite">[cite: 93]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong></td>
+                            <td>Understand narratives on familiar topics <span class="cite">[cite: 94]</span></td>
+                            <td><strong>1.1.6</strong> Understand with support longer simple narratives on a wide range of familiar topics <span class="cite">[cite: 94]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.2 Use appropriate listening strategies in a variety of contexts</strong> <span class="cite">[cite: 95]</span></td>
+                            <td>Use strategies to understand meaning on familiar topics <span class="cite">[cite: 96]</span></td>
+                            <td><strong>1.2.1</strong> Guess the meaning of unfamiliar words from clues provided by other known words and by context on a range of familiar topics <span class="cite">[cite: 96]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.3 Recognise features of spoken genres on familiar topics</strong> <span class="cite">[cite: 97]</span></td>
+                            <td>Recognise typical features of spoken texts <span class="cite">[cite: 97]</span></td>
+                            <td>1.3.1 No learning standard (will be taught in subsequent years) <span class="cite">[cite: 98]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f1_speaking" class="skill-details">
+                <h2>2.0 SPEAKING <span class="cite">[cite: 99]</span></h2>
+                <p class="description">The four Content Standards for Speaking focus on pupils’ ability to <strong>communicate meaning</strong>, <strong>use register appropriately</strong>, <strong>use appropriate communication strategies</strong>, and <strong>communicate appropriately when speaking alone to a small or large group</strong>. <span class="cite">[cite: 99]</span></p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 100]</span></th>
+                            <th>Focus <span class="cite">[cite: 100]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 100]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><strong>SPOKEN INTERACTION</strong> <span class="cite">[cite: 100]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1 Communicate information, ideas, opinions, and feelings intelligibly on familiar topics</strong> <span class="cite">[cite: 101]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 101]</span></td>
+                            <td><strong>2.1.1</strong> Ask about and give detailed information about themselves and others <span class="cite">[cite: 102]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 103]</span></td>
+                            <td>Find out about and communicate information clearly <span class="cite">[cite: 103]</span></td>
+                            <td><strong>2.1.2</strong> Ask about and express rules and obligations <span class="cite">[cite: 103]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 104]</span></td>
+                            <td>Communicate plans and ambitions clearly <span class="cite">[cite: 104]</span></td>
+                            <td><strong>2.1.3</strong> Ask about and describe future plans or events <span class="cite">[cite: 104]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 105]</span></td>
+                            <td>Communicate a point of view clearly <span class="cite">[cite: 105]</span></td>
+                            <td><strong>2.1.4</strong> Explain and give reasons for simple advice <span class="cite">[cite: 105]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 106]</span></td>
+                            <td>Communicate feelings clearly <span class="cite">[cite: 106]</span></td>
+                            <td><strong>2.1.5</strong> Ask about and describe personality <span class="cite">[cite: 106]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.2 Use register appropriately</strong> <span class="cite">[cite: 107]</span></td>
+                            <td>Use register appropriately in familiar contexts <span class="cite">[cite: 107]</span></td>
+                            <td>2.2.1 No learning standard (will be taught in subsequent years) <span class="cite">[cite: 107]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.3 Use appropriate communication strategies</strong> <span class="cite">[cite: 108]</span></td>
+                            <td>Manage interaction appropriately <span class="cite">[cite: 108]</span></td>
+                            <td><strong>2.3.1</strong> Keep interaction going by checking understanding <span class="cite">[cite: 108]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.3</strong> <span class="cite">[cite: 109]</span></td>
+                            <td>Negotiate classroom tasks appropriately <span class="cite">[cite: 109]</span></td>
+                            <td><strong>2.3.2</strong> Agree on steps to complete extended tasks <span class="cite">[cite: 109]</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><strong>SPOKEN PRODUCTION</strong> <span class="cite">[cite: 110]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.4 Communicate appropriately to a small or large group on familiar topics</strong> <span class="cite">[cite: 110]</span></td>
+                            <td>Communicate information, events, stories, feelings, and ideas to an audience <span class="cite">[cite: 111]</span></td>
+                            <td><strong>2.4.1</strong> Narrate short stories, events, and experiences <span class="cite">[cite: 111]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f1_reading" class="skill-details">
+                <h2>3.0 READING <span class="cite">[cite: 112]</span></h2>
+                <p class="description">The two Content Standards for Reading focus on pupils’ ability to <strong>understand meaning</strong> and to <strong>extend thinking through independent reading</strong>. <span class="cite">[cite: 112]</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 113]</span></th>
+                            <th>Focus <span class="cite">[cite: 113]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 113]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>3.1 Understand a variety of texts using appropriate reading strategies</strong> <span class="cite">[cite: 114]</span></td>
+                            <td>Understand main ideas in texts <span class="cite">[cite: 114]</span></td>
+                            <td><strong>3.1.1</strong> Understand the main points in simple longer texts <span class="cite">[cite: 115]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 116]</span></td>
+                            <td>Understand specific details in texts <span class="cite">[cite: 116]</span></td>
+                            <td><strong>3.1.2</strong> Understand specific details and information in simple longer texts <span class="cite">[cite: 116]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 117]</span></td>
+                            <td>Guess meaning of unfamiliar words <span class="cite">[cite: 117]</span></td>
+                            <td><strong>3.1.3</strong> Guess meaning from context and known word clues <span class="cite">[cite: 117]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 118]</span></td>
+                            <td>Use reference resources <span class="cite">[cite: 118]</span></td>
+                            <td><strong>3.1.4</strong> Use print/digital resources with support to check meaning <span class="cite">[cite: 118]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 119]</span></td>
+                            <td>Recognize writer’s attitude/opinion <span class="cite">[cite: 119]</span></td>
+                            <td>3.1.5 No learning standard (taught later) <span class="cite">[cite: 119]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 120]</span></td>
+                            <td>Recognize text features <span class="cite">[cite: 120]</span></td>
+                            <td>3.1.6 No learning standard (taught later) <span class="cite">[cite: 120]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.2 Explore ideas through independent reading</strong> <span class="cite">[cite: 121]</span></td>
+                            <td>Read fiction/non-fiction for enjoyment <span class="cite">[cite: 121]</span></td>
+                            <td><strong>3.2.1</strong> Read and enjoy fiction/non-fiction texts of interest <span class="cite">[cite: 121]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f1_writing" class="skill-details">
+                <h2>4.0 WRITING</h2>
+                <p class="description">The Content Standards for Writing focus on pupils’ ability to <strong>communicate meaning</strong> and to <strong>use appropriate language, form, and style</strong>. <span class="cite">[cite: 122]</span></p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 122]</span></th>
+                            <th>Focus <span class="cite">[cite: 122]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 122]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>4.1 Communicate intelligibly through print and digital media on familiar topics</strong> <span class="cite">[cite: 123]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 123]</span></td>
+                            <td><strong>4.1.1</strong> Give detailed information about themselves and others <span class="cite">[cite: 124]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 125]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 125]</span></td>
+                            <td><strong>4.1.2</strong> Describe future plans or events <span class="cite">[cite: 125]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 126]</span></td>
+                            <td>Communicate ideas clearly <span class="cite">[cite: 126]</span></td>
+                            <td><strong>4.1.3</strong> Narrate factual and imagined events and experiences <span class="cite">[cite: 126]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 127]</span></td>
+                            <td>Communicate feelings and opinions clearly <span class="cite">[cite: 127]</span></td>
+                            <td><strong>4.1.4</strong> Describe personality <span class="cite">[cite: 127]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 128]</span></td>
+                            <td>Organise information coherently <span class="cite">[cite: 128]</span></td>
+                            <td><strong>4.1.5</strong> Connect sentences into two coherent paragraphs using basic coordinating conjunctions and reference pronouns <span class="cite">[cite: 128]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2 Communicate with appropriate language, form, and style</strong> <span class="cite">[cite: 129]</span></td>
+                            <td>Punctuate texts appropriately <span class="cite">[cite: 129]</span></td>
+                            <td><strong>4.2.1</strong> Use capitals, full stops, commas in lists, question marks, and speech marks at discourse level <span class="cite">[cite: 130]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 131]</span></td>
+                            <td>Spell written work accurately <span class="cite">[cite: 131]</span></td>
+                            <td><strong>4.2.2</strong> Spell most high-frequency words accurately in independent writing <span class="cite">[cite: 131]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 132]</span></td>
+                            <td>Plan, draft, and edit work appropriately <span class="cite">[cite: 132]</span></td>
+                            <td><strong>4.2.3</strong> Produce a plan/draft of two paragraphs or more and modify it based on feedback <span class="cite">[cite: 132]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 133]</span></td>
+                            <td>Use register appropriately <span class="cite">[cite: 133]</span></td>
+                            <td>4.2.4 No learning standard (will be taught in subsequent years) <span class="cite">[cite: 133]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f1_lit_in_action" class="skill-details">
+                <h2>5.0 LITERATURE IN ACTION <span class="cite">[cite: 134]</span></h2>
+                <p class="description">The Literature in Action Content Standards focus on pupils’ ability to <strong>engage with, respond to, and interpret texts</strong>, <strong>analyse and evaluate texts</strong>, and <strong>express imaginative responses</strong>. <span class="cite">[cite: 134]</span></p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 135]</span></th>
+                            <th>Focus <span class="cite">[cite: 135]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 135]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>5.1 Engage with, respond to, and interpret literary texts</strong> <span class="cite">[cite: 136]</span></td>
+                            <td>Give personal responses to texts <span class="cite">[cite: 136]</span></td>
+                            <td><strong>5.1.1</strong> Describe a character’s actions/feelings and explain reasons in simple language <span class="cite">[cite: 137]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.1</strong> <span class="cite">[cite: 138]</span></td>
+                            <td>Interpret texts <span class="cite">[cite: 138]</span></td>
+                            <td><strong>5.1.2</strong> Identify and describe key characters in a text using simple language <span class="cite">[cite: 138]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.2 Analyse and evaluate literary texts</strong> <span class="cite">[cite: 139]</span></td>
+                            <td>Analyse and evaluate texts <span class="cite">[cite: 139]</span></td>
+                            <td>5.2.1 No learning standard (taught in subsequent years) <span class="cite">[cite: 140]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.3 Express imaginative responses to texts</strong> <span class="cite">[cite: 141]</span></td>
+                            <td>Create imaginative work <span class="cite">[cite: 141]</span></td>
+                            <td><strong>5.3.1</strong> Respond imaginatively through simple stories, poems, or other creative outputs <span class="cite">[cite: 141]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note">Please note that Literature in Action is assessed through the four language skills (Listening, Speaking, Reading, Writing). <span class="cite">[cite: 142]</span></p>
+            </div>
+        </div>
+
+        <div id="eng_f3" class="subject-content">
+            <p class="description">Based on the source "DSKP FORM 3.md", here are the Content Standards (CS) and Learning Standards (LS) for English Form 3. <span class="cite">[cite: 143]</span></p>
+            <nav class="skill-nav">
+                <button onclick="showSkill('eng_f3', 'listening', this)" class="active">1.0 Listening Skills</button>
+                <button onclick="showSkill('eng_f3', 'speaking', this)">2.0 Speaking Skills</button>
+                <button onclick="showSkill('eng_f3', 'reading', this)">3.0 Reading Skills</button>
+                <button onclick="showSkill('eng_f3', 'writing', this)">4.0 Writing Skills</button>
+                <button onclick="showSkill('eng_f3', 'lit_in_action', this)">5.0 Literature in Action</button>
+            </nav>
+
+            <div id="eng_f3_listening" class="skill-details active">
+                <h2>1.0 Listening Skills</h2>
+                <p class="description">The three Content Standards for Listening in Form 3 focus on pupils’ ability to <strong>understand meaning</strong>, to <strong>use appropriate listening strategies</strong>, and to <strong>recognise typical features of spoken texts</strong>. <span class="cite">[cite: 144]</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 144]</span></th>
+                            <th>Focus <span class="cite">[cite: 144]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 144]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1.1 Understand meaning in a variety of familiar contexts</strong> <span class="cite">[cite: 145]</span></td>
+                            <td>Understand the main idea when listening to texts on familiar topics <span class="cite">[cite: 146]</span></td>
+                            <td><strong>1.1.1</strong> Understand independently the main ideas in simple longer texts on an increased range of familiar topics <span class="cite">[cite: 147]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 148]</span></td>
+                            <td>Understand specific details when listening to texts on familiar topics <span class="cite">[cite: 148]</span></td>
+                            <td><strong>1.1.2</strong> Understand independently specific information and details in longer texts on an increased range of familiar topics <span class="cite">[cite: 149]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 150]</span></td>
+                            <td>Understand attitude or opinion when listening to texts on familiar topics <span class="cite">[cite: 150]</span></td>
+                            <td><strong>1.1.3</strong> Recognise with little or no support attitudes or opinions in longer texts on an increased range of familiar topics <span class="cite">[cite: 151]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 152]</span></td>
+                            <td>Understand classroom instructions about familiar topics <span class="cite">[cite: 152]</span></td>
+                            <td><strong>1.1.4</strong> Understand independently longer sequences of classroom instructions <span class="cite">[cite: 152]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 153]</span></td>
+                            <td>Understand questions on familiar topics <span class="cite">[cite: 153]</span></td>
+                            <td><strong>1.1.5</strong> Understand independently more complex questions <span class="cite">[cite: 153]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.1</strong> <span class="cite">[cite: 154]</span></td>
+                            <td>Understand narratives on familiar topics <span class="cite">[cite: 154]</span></td>
+                            <td><strong>1.1.6</strong> Understand independently longer simple narratives on a range of familiar topics <span class="cite">[cite: 154]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.2 Use appropriate listening strategies in a variety of contexts</strong> <span class="cite">[cite: 155]</span></td>
+                            <td>Use strategies to understand meaning on familiar topics <span class="cite">[cite: 155]</span></td>
+                            <td><strong>1.2.1</strong> Guess the meaning of unfamiliar words from clues provided by other words and by context on an increased range of familiar topics <span class="cite">[cite: 156]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>1.3 Recognise features of spoken genres on familiar topics</strong> <span class="cite">[cite: 157]</span></td>
+                            <td>Recognise typical features of spoken texts <span class="cite">[cite: 157]</span></td>
+                            <td><strong>1.3.1</strong> Recognise with support typical features at word, sentence and text levels of a small number of spoken genres <span class="cite">[cite: 158]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f3_speaking" class="skill-details">
+                <h2>2.0 Speaking Skills</h2>
+                <p class="description">The four Content Standards for Speaking in Form 3 focus on pupils’ ability to <strong>communicate meaning</strong>, to <strong>use register appropriately</strong>, to <strong>use appropriate communication strategies</strong>, and to <strong>communicate appropriately when speaking alone to a small or large group</strong>. <span class="cite">[cite: 159]</span></p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 160]</span></th>
+                            <th>Focus <span class="cite">[cite: 160]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 160]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><strong>SPOKEN INTERACTION</strong> <span class="cite">[cite: 160]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1 Communicate information, ideas, opinions and feelings intelligibly on familiar topics</strong> <span class="cite">[cite: 161]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 161]</span></td>
+                            <td><strong>2.1.1</strong> Paraphrase short simple texts <span class="cite">[cite: 162]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 163]</span></td>
+                            <td>Find out about and communicate information clearly <span class="cite">[cite: 163]</span></td>
+                            <td><strong>2.1.2</strong> Ask about and explain simple processes <span class="cite">[cite: 163]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 164]</span></td>
+                            <td>Communicate plans and ambitions clearly <span class="cite">[cite: 164]</span></td>
+                            <td><strong>2.1.3</strong> Describe future plans and ambitions <span class="cite">[cite: 164]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 165]</span></td>
+                            <td>Communicate a point of view clearly <span class="cite">[cite: 165]</span></td>
+                            <td><strong>2.1.4</strong> Explain own point of view <span class="cite">[cite: 165]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.1</strong> <span class="cite">[cite: 166]</span></td>
+                            <td>Communicate feelings clearly <span class="cite">[cite: 166]</span></td>
+                            <td><strong>2.1.5</strong> Express and respond to common feelings such as happiness, sadness, surprise, and interest <span class="cite">[cite: 166]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.2 Use register appropriately</strong> <span class="cite">[cite: 167]</span></td>
+                            <td>Use register appropriately in familiar contexts <span class="cite">[cite: 167]</span></td>
+                            <td><strong>2.2.1</strong> Use formal and informal registers appropriately in some familiar contexts <span class="cite">[cite: 168]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.3 Use appropriate communication strategies</strong> <span class="cite">[cite: 169]</span></td>
+                            <td>Manage interaction appropriately <span class="cite">[cite: 169]</span></td>
+                            <td><strong>2.3.1</strong> Keep interaction going in longer exchanges by asking a speaker to slow down, speak up, or repeat what they have said <span class="cite">[cite: 169]</span></td>
+                        </tr>
+                        <tr>
+                           <td colspan="3"><strong>SPOKEN PRODUCTION</strong> <span class="cite">[cite: 170]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>2.4 Communicate appropriately to a small or large group on familiar topics</strong> <span class="cite">[cite: 171]</span></td>
+                            <td>Communicate information, events, stories, feelings, and ideas to an audience <span class="cite">[cite: 171]</span></td>
+                            <td><strong>2.4.1</strong> Summarise the main points of a story <span class="cite">[cite: 171]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f3_reading" class="skill-details">
+                <h2>3.0 Reading Skills</h2>
+                <p class="description">The two Content Standards for Reading in Form 3 focus on pupils’ ability to <strong>understand meaning</strong> and to <strong>extend thinking through independent reading</strong>. <span class="cite">[cite: 172]</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 173]</span></th>
+                            <th>Focus <span class="cite">[cite: 173]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 173]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>3.1 Understand a variety of texts by using a range of appropriate reading strategies to construct meaning</strong> <span class="cite">[cite: 174]</span></td>
+                            <td>Understand the main idea in a variety of text types on familiar topics <span class="cite">[cite: 175]</span></td>
+                            <td><strong>3.1.1</strong> Understand the main points in longer texts on an increased range of familiar topics <span class="cite">[cite: 176]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 177]</span></td>
+                            <td>Understand specific details in a variety of text types on familiar topics <span class="cite">[cite: 177]</span></td>
+                            <td><strong>3.1.2</strong> Understand specific details and information in longer texts on an increased range of familiar topics <span class="cite">[cite: 178]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 179]</span></td>
+                            <td>Guess the meaning of unfamiliar words in a variety of text types on familiar topics <span class="cite">[cite: 179]</span></td>
+                            <td><strong>3.1.3</strong> Guess the meaning of unfamiliar words from clues provided by other words and by context on an increased range of familiar topics <span class="cite">[cite: 180]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 181]</span></td>
+                            <td>Use dictionary skills appropriately to check and extend understanding <span class="cite">[cite: 181]</span></td>
+                            <td><strong>3.1.4</strong> Use independently familiar print and digital resources to check meaning and extend understanding <span class="cite">[cite: 182]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 183]</span></td>
+                            <td>Recognise the attitude or opinion of the writer in a variety of text types on familiar topics <span class="cite">[cite: 183]</span></td>
+                            <td><strong>3.1.5</strong> Recognise with support the attitude or opinion of the writer in simple longer texts on an increased range of familiar topics <span class="cite">[cite: 184]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.1</strong> <span class="cite">[cite: 185]</span></td>
+                            <td>Recognise typical features of texts on familiar topics <span class="cite">[cite: 185]</span></td>
+                            <td><strong>3.1.6</strong> Recognise with support typical features at word, sentence, and text levels of a range of genres <span class="cite">[cite: 186]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>3.2 Explore and expand ideas for personal development by reading independently and widely</strong> <span class="cite">[cite: 187]</span></td>
+                            <td>Read and understand a variety of fiction and non-fiction texts with confidence and enjoyment <span class="cite">[cite: 188]</span></td>
+                            <td><strong>3.2.1</strong> Read, enjoy, and give a personal response to fiction or non-fiction and other suitable print and digital texts of interest <span class="cite">[cite: 189]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f3_writing" class="skill-details">
+                <h2>4.0 Writing Skills</h2>
+                <p class="description">The Content Standards for Writing in Form 3 focus on pupils’ ability to <strong>communicate meaning</strong> and to <strong>use appropriate language, form, and style</strong>. <span class="cite">[cite: 190]</span></p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 191]</span></th>
+                            <th>Focus <span class="cite">[cite: 191]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 191]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>4.1 Communicate intelligibly through print and digital media on familiar topics</strong> <span class="cite">[cite: 192]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 192]</span></td>
+                            <td><strong>4.1.1</strong> Explain simple content from what they have read or heard <span class="cite">[cite: 193]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 194]</span></td>
+                            <td>Communicate information clearly <span class="cite">[cite: 194]</span></td>
+                            <td><strong>4.1.2</strong> Explain simple processes <span class="cite">[cite: 194]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 195]</span></td>
+                            <td>Communicate ideas clearly <span class="cite">[cite: 195]</span></td>
+                            <td><strong>4.1.3</strong> Summarise the main points and explain key details in a story, text, or plot <span class="cite">[cite: 195]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 196]</span></td>
+                            <td>Communicate feelings and opinions clearly <span class="cite">[cite: 196]</span></td>
+                            <td><strong>4.1.4</strong> Express and respond to opinions and common feelings such as happiness, sadness, surprise, and interest <span class="cite">[cite: 196]</span></td>
+                        </tr>
+                         <tr>
+                            <td><strong>4.1</strong> <span class="cite">[cite: 197]</span></td>
+                            <td>Organise information coherently <span class="cite">[cite: 197]</span></td>
+                            <td><strong>4.1.5</strong> Organise, sequence, and develop ideas within short texts on familiar topics <span class="cite">[cite: 197]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2 Communicate with appropriate language, form, and style</strong> <span class="cite">[cite: 198]</span></td>
+                            <td>Punctuate texts appropriately <span class="cite">[cite: 198]</span></td>
+                            <td><strong>4.2.1</strong> Punctuate written work with moderate accuracy <span class="cite">[cite: 199]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 200]</span></td>
+                            <td>Spell written work accurately <span class="cite">[cite: 200]</span></td>
+                            <td><strong>4.2.2</strong> Spell written work with moderate accuracy <span class="cite">[cite: 200]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 201]</span></td>
+                            <td>Plan, draft, and edit work appropriately <span class="cite">[cite: 201]</span></td>
+                            <td><strong>4.2.3</strong> Produce a plan or draft of two paragraphs or more and modify this appropriately independently <span class="cite">[cite: 201]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4.2</strong> <span class="cite">[cite: 202]</span></td>
+                            <td>Use register appropriately <span class="cite">[cite: 202]</span></td>
+                            <td><strong>4.2.4</strong> Begin to use formal and informal registers appropriate to the target audience in familiar situations <span class="cite">[cite: 202]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="eng_f3_lit_in_action" class="skill-details">
+                <h2>5.0 Literature in Action</h2>
+                <p class="description">The Literature in Action Content Standards for Form 3 focus on pupils’ ability to <strong>enjoy and appreciate different text types</strong>, to <strong>analyse and evaluate texts</strong>, and to <strong>respond imaginatively to texts</strong>. <span class="cite">[cite: 203]</span></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Standards <span class="cite">[cite: 204]</span></th>
+                            <th>Focus <span class="cite">[cite: 204]</span></th>
+                            <th>Learning Standards <span class="cite">[cite: 204]</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>5.1 Engage with, respond to, and interpret a variety of literary text types</strong> <span class="cite">[cite: 205]</span></td>
+                            <td>Give a personal response to a variety of literary text types <span class="cite">[cite: 206]</span></td>
+                            <td><strong>5.1.1</strong> Explain why a part or aspect of a text interests them <span class="cite">[cite: 207]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.1</strong> <span class="cite">[cite: 208]</span></td>
+                            <td>Interpret a variety of literary text types <span class="cite">[cite: 208]</span></td>
+                            <td><strong>5.1.2</strong> Explain briefly the development of plot, characters, and themes in a text <span class="cite">[cite: 208]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.2 Analyse and evaluate a variety of literary text types</strong> <span class="cite">[cite: 209]</span></td>
+                            <td>Analyse and evaluate a variety of literary text types <span class="cite">[cite: 210]</span></td>
+                            <td><strong>5.2.1</strong> Identify key stylistic features of a text and explain briefly why the author uses them <span class="cite">[cite: 211]</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>5.3 Express an imaginative response to literary texts</strong> <span class="cite">[cite: 212]</span></td>
+                            <td>Plan, prepare, and produce creative work with a focus on language use <span class="cite">[cite: 212]</span></td>
+                            <td><strong>5.3.1</strong> Respond imaginatively and intelligibly through creating PowerPoints, visuals, posters, blogs, and webpages <span class="cite">[cite: 213]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="note">It is important to note that Literature in Action is assessed through the four language skills (Listening, Speaking, Reading, and Writing). <span class="cite">[cite: 214]</span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSubjectId = 'bm_f1'; // Default subject
+        let currentSkillPrefix = 'bm_f1'; // Default skill prefix
+
+        function showSubject(subjectId, clickedButton) {
+            currentSubjectId = subjectId;
+            // Hide all subject content
+            const subjectContents = document.querySelectorAll('.subject-content');
+            subjectContents.forEach(content => content.classList.remove('active'));
+
+            // Show the selected subject content
+            const activeSubjectContent = document.getElementById(subjectId);
+            if (activeSubjectContent) {
+                activeSubjectContent.classList.add('active');
+            }
+
+            // Update active state for main navigation buttons
+            const mainNavButtons = document.querySelectorAll('.main-nav button');
+            mainNavButtons.forEach(btn => btn.classList.remove('active'));
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+
+            // Activate the first skill tab for the new subject
+            const firstSkillButton = document.querySelector(`#${subjectId} .skill-nav button`);
+            if (firstSkillButton) {
+                firstSkillButton.click(); // Simulate a click to also show its content
+            }
+        }
+
+        function showSkill(subjectPrefix, skillId, clickedButton) {
+            currentSkillPrefix = subjectPrefix;
+            // Hide all skill details within the current subject
+            const skillDetails = document.querySelectorAll(`#${subjectPrefix} .skill-details`);
+            skillDetails.forEach(detail => detail.classList.remove('active'));
+
+            // Show the selected skill detail
+            const activeSkillDetail = document.getElementById(`${subjectPrefix}_${skillId}`);
+            if (activeSkillDetail) {
+                activeSkillDetail.classList.add('active');
+            }
+
+            // Update active state for skill navigation buttons within the current subject
+            const skillNavButtons = document.querySelectorAll(`#${subjectPrefix} .skill-nav button`);
+            skillNavButtons.forEach(btn => btn.classList.remove('active'));
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+        }
+
+        // Initialize the page by showing the default subject and its first skill
+        document.addEventListener('DOMContentLoaded', () => {
+            const defaultMainButton = document.querySelector('.main-nav button');
+            if (defaultMainButton) {
+                 showSubject(currentSubjectId, defaultMainButton); // Initial call to setup first subject and skill
+            }
+        });
+    </script>
+
+</body>
+</html>
